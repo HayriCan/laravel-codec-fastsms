@@ -16,7 +16,7 @@ composer require hayrican/laravel-codec-fastsms --dev
 
 #### Service Provider (Laravel 5.5'ten Eski Versiyonlar)
 
-###### Eğer Laravel 5.5 veya daha yeni bir versiyonunu kullanıyorsanız bu adımı atlayabilirsiniz.
+##### Eğer Laravel 5.5 veya daha yeni bir versiyonunu kullanıyorsanız bu adımı atlayabilirsiniz.
 
 Servis Provider kaydını `config/app.php` klasöründe yapınız.
 ```php
