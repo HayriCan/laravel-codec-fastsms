@@ -100,15 +100,15 @@ Artık `/codec-fastsms` rotasına `POST` isteği yaparak sms gönderebilirsiniz
 ## 2.Artisan Konsol
 ##### Örn1. Bir numaraya mesaj gönderime
 ```bash
-$ php artisan codec:send --phone='5XXXXXXXXX' --messageContent='Message Text'
+$ php artisan fastsms:send --phone='5XXXXXXXXX' --messageContent='Message Text'
 ```
 ##### Örn2. Birden fazla numaraya aynı mesajı gönderme 
 ```bash
-$ php artisan codec:send --phone='5XXXXXXXXX~5YYYYYYYYY~5ZZZZZZZZZ' --messageContent='Message Text'
+$ php artisan fastsms:send --phone='5XXXXXXXXX~5YYYYYYYYY~5ZZZZZZZZZ' --messageContent='Message Text'
 ```
 ##### Örn3. Birden fazla numaraya farklı mesaj gönderme 
 ```bash
-$ php artisan codec:send --phone='5XXXXXXXXX~5YYYYYYYYY~5ZZZZZZZZZ' --messageContent='Message Text~Message Text2~Message Text3'
+$ php artisan fastsms:send --phone='5XXXXXXXXX~5YYYYYYYYY~5ZZZZZZZZZ' --messageContent='Message Text~Message Text2~Message Text3'
 ```
 ### Konsol Zorunlu Parametreler:
 
@@ -121,10 +121,10 @@ $ php artisan codec:send --phone='5XXXXXXXXX~5YYYYYYYYY~5ZZZZZZZZZ' --messageCon
 ### Konsol İsteğe Bağlı Parametreler:
 
 | Anahtar                   | Değer         | Açıklama   |
-| ---                   | ---           | ---           |
-| `--msgSpecialId `       | Message_Title |Gönderiminiz için belirlediğiniz konu başlığı. (Sistem kayıtlarında takibinin yapılabilmesi için kullanabilirsiniz) |
+| ---                     | ---           | ---           |
+| `--msgSpecialId `       | Mesaj Başlığı |Gönderiminiz için belirlediğiniz konu başlığı. (Sistem kayıtlarında takibinin yapılabilmesi için kullanabilirsiniz) |
 | `--headerCode `         | Header_Code   |Servisin “GetSenderInfo” metodu ile veya müşteri hizmetlerinden temin edebileceğiniz numerik bir değerdir. Aynı alfanumeriği birden fazla sanal numara üzerinde veya operatörde kullanıyorsanız bu alfanumerikleri ayırt etmek için kullanılır. Bu parametre isteğe bağlıdır. Boş veya null bir değer girilebilir.   |
-| `--optionalParameters ` | OPTIONAL_PARAM|Boş veya null bir değer girilebilir. “İSTEĞE BAĞLI PARAMETRE KULLANIMI” bölümüne bakınız. |
+| `--optionalParameters`  | OPTIONAL_PARAM|Boş veya null bir değer girilebilir. “İSTEĞE BAĞLI PARAMETRE KULLANIMI” bölümüne bakınız. |
 
 
 

@@ -102,15 +102,15 @@ You can send sms via a `POST` request to `/codec-fastsms`
 ## 2.Artisan Console
 ##### Eg.1. Send a message to a number
 ```bash
-$ php artisan codec:send --phone='5XXXXXXXXX' --messageContent='Message Text'
+$ php artisan fastsms:send --phone='5XXXXXXXXX' --messageContent='Message Text'
 ```
 ##### Eg.2. Send a message to multiple numbers
 ```bash
-$ php artisan codec:send --phone='5XXXXXXXXX~5YYYYYYYYY~5ZZZZZZZZZ' --messageContent='Message Text'
+$ php artisan fastsms:send --phone='5XXXXXXXXX~5YYYYYYYYY~5ZZZZZZZZZ' --messageContent='Message Text'
 ```
 ##### Eg.3. Send multiple messages to multiple numbers
 ```bash
-$ php artisan codec:send --phone='5XXXXXXXXX~5YYYYYYYYY~5ZZZZZZZZZ' --messageContent='Message Text~Message Text2~Message Text3'
+$ php artisan fastsms:send --phone='5XXXXXXXXX~5YYYYYYYYY~5ZZZZZZZZZ' --messageContent='Message Text~Message Text2~Message Text3'
 ```
 ### Command Required Parameters:
 
