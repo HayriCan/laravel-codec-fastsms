@@ -126,7 +126,7 @@ $ php artisan codec:send --phone='5XXXXXXXXX~5YYYYYYYYY~5ZZZZZZZZZ' --messageCon
 | ---                   | ---           | ---           |
 | `--msgSpecialId `       | Message_Title |This field use for searching on the Codec system records |
 | `--headerCode `         | Header_Code   |You can use this field for tracking messages from Codec Customer Service |
-| `--optionalParameters ` | OPTIONAL_PARAM|Optional parameters |
+| `--optionalParameters`  | OPTIONAL_PARAM|Optional parameters |
 
 ## Author
 
