@@ -16,10 +16,13 @@ class CodecFastSmsServiceProvider extends ServiceProvider
             __DIR__.'/../config/codecfastsms.php' => config_path('codecfastsms.php'),
         ]);
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');
+        $this->commands(
+            Commands\CodecFastSmsCommand::class
+        );
     }
 
     public function register()
     {
-        
+        $this->commands('HayriCan\CodecFastSms\Commands\CodecFastSmsCommand');
     }
 }

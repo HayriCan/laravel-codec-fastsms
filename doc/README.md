@@ -1,4 +1,8 @@
 # Laravel CODEC FAST SMS
+[![Latest Stable Version](https://poser.pugx.org/hayrican/laravel-codec-fastsms/version)](https://packagist.org/packages/hayrican/laravel-codec-fastsms)
+[![Total Downloads](https://poser.pugx.org/hayrican/laravel-codec-fastsms/downloads)](https://packagist.org/packages/hayrican/laravel-codec-fastsms)
+[![Latest Unstable Version](https://poser.pugx.org/hayrican/laravel-codec-fastsms/v/unstable)](//packagist.org/packages/hayrican/laravel-codec-fastsms)
+[![License](https://poser.pugx.org/hayrican/laravel-codec-fastsms/license)](https://packagist.org/packages/hayrican/laravel-codec-fastsms)
 
 Bu paket, Laravel projeleriniz üzerinde [Codec Mesajlaşma Platformu] 
 entegresyonunu kolay ve sıkıntısız bir şekilde gerçekleştirmenize olanak sağlar.
@@ -11,7 +15,7 @@ entegresyonunu kolay ve sıkıntısız bir şekilde gerçekleştirmenize olanak 
 Öncelikle `hayrican/laravel-codec-fastsms` paketini projenizin Composer bağımlılıklarına eklemeniz gerekmektedir.
 Bunun için aşağıdaki komutu projeniz içerisinde çalıştırın.
 ```
-composer require hayrican/laravel-codec-fastsms --dev
+composer require hayrican/laravel-codec-fastsms
 ```
 
 #### Service Provider (Laravel 5.5'ten Eski Versiyonlar)
@@ -41,7 +45,7 @@ Projenizde `config/codecfastsms.php` klasörünü görüntüleyip Codec API eri�
   'sender'=> "CODEC_SENDER",
 ]
 ```
-####  Route Config
+####  Rota Yapılandırması
 Varsayılan router prefix'i `api` ve middleware `api`. Bu bölümde prefix ve middleware bölümlerini düzenleyebilirsiniz.
 ```array
 [
@@ -66,7 +70,8 @@ $ php artisan migrate
 ```
 Bu işlemden sonra `sms_records_table` tablosu veritabanınızda oluşturulacak.
 
-## Usage
+# Paketin Kullanımı
+## 1.HTTP Request
 Artık `/codec-fastsms` rotasına `POST` isteği yaparak sms gönderebilirsiniz
 ##### Örn1. Bir numaraya mesaj gönderime
 ![Screencast1](postman-1.PNG)
@@ -78,7 +83,7 @@ Artık `/codec-fastsms` rotasına `POST` isteği yaparak sms gönderebilirsiniz
 
 ### Post Zorunlu Parametreler:
 
-| Key                   | Value         | Description   |
+| Anahtar               | Değer         | Açıklama   |
 | ---                   | ---           | ---           |
 | `phone`               | 5XXXXXXXXX    |Gönderim yapmak istediğiniz telefon numarası veya birden fazla numaraya gönderim yapılacak ise ~ karakteri ile ayrılmış telefon numaraları. Örn. `5XXXXXXXXX~5YYYYYYYYY`|
 | `messageContent`      | Mesaj İçeriği |Göndermek istediğiniz mesaj içeriği veya birden fazla numaraya gönderim yapılacak iste gönderilecek numara adedi kadar ~ karakteri ile ayrılmış mesaj içerikleri.Örn. `MessageContent1~MessageContent2`. NOT: Eğer bu özelliği kullanıyorsanız mesaj sayınız ile telefon numarası sayılarınızın aynı olmasına dikkat ediniz |
@@ -86,18 +91,49 @@ Artık `/codec-fastsms` rotasına `POST` isteği yaparak sms gönderebilirsiniz
 
 ### Post İsteğe Bağlı Parametreler:
 
-| Key                   | Value         | Description   |
+| Anahtar               | Değer         | Açıklama   |
 | ---                   | ---           | ---           |
 | `msgSpecialId `       | Message_Title |Gönderiminiz için belirlediğiniz konu başlığı. (Sistem kayıtlarında takibinin yapılabilmesi için kullanabilirsiniz) |
 | `headerCode `         | Header_Code   |Servisin “GetSenderInfo” metodu ile veya müşteri hizmetlerinden temin edebileceğiniz numerik bir değerdir. Aynı alfanumeriği birden fazla sanal numara üzerinde veya operatörde kullanıyorsanız bu alfanumerikleri ayırt etmek için kullanılır. Bu parametre isteğe bağlıdır. Boş veya null bir değer girilebilir.   |
 | `optionalParameters ` | OPTIONAL_PARAM|Boş veya null bir değer girilebilir. “İSTEĞE BAĞLI PARAMETRE KULLANIMI” bölümüne bakınız. |
+
+## 2.Artisan Konsol
+##### Örn1. Bir numaraya mesaj gönderime
+```bash
+$ php artisan codec:send --phone='5XXXXXXXXX' --messageContent='Message Text'
+```
+##### Örn2. Birden fazla numaraya aynı mesajı gönderme 
+```bash
+$ php artisan codec:send --phone='5XXXXXXXXX~5YYYYYYYYY~5ZZZZZZZZZ' --messageContent='Message Text'
+```
+##### Örn3. Birden fazla numaraya farklı mesaj gönderme 
+```bash
+$ php artisan codec:send --phone='5XXXXXXXXX~5YYYYYYYYY~5ZZZZZZZZZ' --messageContent='Message Text~Message Text2~Message Text3'
+```
+### Konsol Zorunlu Parametreler:
+
+| Anahtar             | Değer         | Açıklama   |
+| ---                 | ---           | ---           |
+| `--phone`           | 5XXXXXXXXX    |Gönderim yapmak istediğiniz telefon numarası veya birden fazla numaraya gönderim yapılacak ise ~ karakteri ile ayrılmış telefon numaraları. Örn. `5XXXXXXXXX~5YYYYYYYYY`|
+| `--messageContent`  | Mesaj İçeriği |Göndermek istediğiniz mesaj içeriği veya birden fazla numaraya gönderim yapılacak iste gönderilecek numara adedi kadar ~ karakteri ile ayrılmış mesaj içerikleri.Örn. `MessageContent1~MessageContent2`. NOT: Eğer bu özelliği kullanıyorsanız mesaj sayınız ile telefon numarası sayılarınızın aynı olmasına dikkat ediniz |
+
+
+### Konsol İsteğe Bağlı Parametreler:
+
+| Anahtar                   | Değer         | Açıklama   |
+| ---                   | ---           | ---           |
+| `--msgSpecialId `       | Message_Title |Gönderiminiz için belirlediğiniz konu başlığı. (Sistem kayıtlarında takibinin yapılabilmesi için kullanabilirsiniz) |
+| `--headerCode `         | Header_Code   |Servisin “GetSenderInfo” metodu ile veya müşteri hizmetlerinden temin edebileceğiniz numerik bir değerdir. Aynı alfanumeriği birden fazla sanal numara üzerinde veya operatörde kullanıyorsanız bu alfanumerikleri ayırt etmek için kullanılır. Bu parametre isteğe bağlıdır. Boş veya null bir değer girilebilir.   |
+| `--optionalParameters ` | OPTIONAL_PARAM|Boş veya null bir değer girilebilir. “İSTEĞE BAĞLI PARAMETRE KULLANIMI” bölümüne bakınız. |
+
+
 
 ## Yazar
 
 [Hayri Can BARÇIN]  
 Email: [Contact Me]
 
-## License
+## Lisans
 
 This project is licensed under the MIT License - see the [License File](LICENSE) for details
 

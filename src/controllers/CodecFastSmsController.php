@@ -81,7 +81,7 @@ class CodecFastSmsController extends Controller
         $pw=config('codecfastsms.password');
         $sender=config('codecfastsms.sender');
         $responseType = 3;
-        $url="http://fastsms.codec.com.tr/FastApi.asmx/SendSms?";  //https://ssl.fastsms.codec.com.tr/FastApi.asmx/SendSms?
+        $url="http://fastsms.codec.com.tr/FastApi.asmx/SendSms?";
         $url.="userName=".$un;
         $url.="&password=".$pw;
         $url.="&optionalParameters=".$optionalParameters;

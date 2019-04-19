@@ -1,5 +1,9 @@
 [Türkçe](doc#readme)
 # Laravel CODEC FAST SMS
+[![Latest Stable Version](https://poser.pugx.org/hayrican/laravel-codec-fastsms/version)](https://packagist.org/packages/hayrican/laravel-codec-fastsms)
+[![Total Downloads](https://poser.pugx.org/hayrican/laravel-codec-fastsms/downloads)](https://packagist.org/packages/hayrican/laravel-codec-fastsms)
+[![Latest Unstable Version](https://poser.pugx.org/hayrican/laravel-codec-fastsms/v/unstable)](//packagist.org/packages/hayrican/laravel-codec-fastsms)
+[![License](https://poser.pugx.org/hayrican/laravel-codec-fastsms/license)](https://packagist.org/packages/hayrican/laravel-codec-fastsms)
 
 This package provides easy and painless integration of [Codec Messaging Platform API] into your
 Laravel projects.
@@ -11,7 +15,7 @@ Laravel projects.
 ## Installation
 To get started, you should add the `hayrican/laravel-codec-fastsms` Composer dependency to your project:
 ```
-composer require hayrican/laravel-codec-fastsms --dev
+composer require hayrican/laravel-codec-fastsms
 ```
 
 #### Service Provider (Laravel Older 5.5)
@@ -65,7 +69,8 @@ $ php artisan migrate
 ```
 And `sms_records_table` will appear on your database.
 
-## Usage
+# Package Usage
+## 1.HTTP Request
 You can send sms via a `POST` request to `/codec-fastsms`
 ##### Eg.1. Send a message to a number
 ![Screencast1](doc/postman-1.PNG)
@@ -88,8 +93,40 @@ You can send sms via a `POST` request to `/codec-fastsms`
 | Key                   | Value         | Description   |
 | ---                   | ---           | ---           |
 | `msgSpecialId `       | Message_Title |This field use for searching on the Codec system records |
-| `headerCode `         | Header_Code   |You can use this field for tracking messages from Codec Customer Servis |
+| `headerCode `         | Header_Code   |You can use this field for tracking messages from Codec Customer Service |
 | `optionalParameters ` | OPTIONAL_PARAM|Optional parameters |
+
+
+
+
+## 2.Artisan Console
+##### Eg.1. Send a message to a number
+```bash
+$ php artisan codec:send --phone='5XXXXXXXXX' --messageContent='Message Text'
+```
+##### Eg.2. Send a message to multiple numbers
+```bash
+$ php artisan codec:send --phone='5XXXXXXXXX~5YYYYYYYYY~5ZZZZZZZZZ' --messageContent='Message Text'
+```
+##### Eg.3. Send multiple messages to multiple numbers
+```bash
+$ php artisan codec:send --phone='5XXXXXXXXX~5YYYYYYYYY~5ZZZZZZZZZ' --messageContent='Message Text~Message Text2~Message Text3'
+```
+### Command Required Parameters:
+
+| Key                | Value         | Description   |
+| ---                | ---           | ---           |
+| `--phone`          | 5XXXXXXXXX    |Phone number(s) to send multiple numbers you should put `~` between numbers. eg. `5XXXXXXXXX~5YYYYYYYYY`   |
+| `--messageContent` | Message Text  |Message content(s) if you want to send different messages to different numbers you should put `~` between message contents. eg. `MessageContent1~MessageContent2`. NOTE: If you use this property, you should have equal number of phone and messageContent |
+
+
+### Command Optional Parameters:
+
+| Key                   | Value         | Description   |
+| ---                   | ---           | ---           |
+| `--msgSpecialId `       | Message_Title |This field use for searching on the Codec system records |
+| `--headerCode `         | Header_Code   |You can use this field for tracking messages from Codec Customer Service |
+| `--optionalParameters ` | OPTIONAL_PARAM|Optional parameters |
 
 ## Author
 
