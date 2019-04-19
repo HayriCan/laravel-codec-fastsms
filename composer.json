@@ -1,0 +1,29 @@
+{
+    "name": "hayrican/laravel-codec-fastsms",
+    "description": "Codec Fast Sms Api Integration",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "hayrican",
+            "email": "hayricanbarcin@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "ext-json": "*",
+        "ext-simplexml": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "HayriCan\\CodecFastSms\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "HayriCan\\CodecFastSms\\CodecFastSmsServiceProvider"
+            ]
+        }
+    }
+}
