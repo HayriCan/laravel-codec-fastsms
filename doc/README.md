@@ -69,11 +69,11 @@ Bu işlemden sonra `sms_records_table` tablosu veritabanınızda oluşturulacak.
 ## Usage
 Artık `/codec-fastsms` rotasına `POST` isteği yaparak sms gönderebilirsiniz
 ##### Örn1. Bir numaraya mesaj gönderime
-![Screencast1](postman1.PNG)
+![Screencast1](postman-1.PNG)
 ##### Örn2. Birden fazla numaraya aynı mesajı gönderme 
-![Screencast2](postman2.PNG)
+![Screencast2](postman-2.PNG)
 ##### Örn3. Birden fazla numaraya farklı mesaj gönderme 
-![Screencast3](postman3.PNG)
+![Screencast3](postman-3.PNG)
 
 
 ### Post Zorunlu Parametreler:

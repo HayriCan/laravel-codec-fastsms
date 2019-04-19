@@ -68,11 +68,11 @@ And `sms_records_table` will appear on your database.
 ## Usage
 You can send sms via a `POST` request to `/codec-fastsms`
 ##### Eg.1. Send a message to a number
-![Screencast1](doc/postman1.PNG)
+![Screencast1](doc/postman-1.PNG)
 ##### Eg.2. Send a message to multiple numbers
-![Screencast2](doc/postman2.PNG)
+![Screencast2](doc/postman-2.PNG)
 ##### Eg.3. Send multiple messages to multiple numbers
-![Screencast3](doc/postman3.PNG)
+![Screencast3](doc/postman-3.PNG)
 
 
 ### Post Required Parameters:
