@@ -101,4 +101,21 @@ class CodecFastSmsController extends Controller
         }
     }
 
+    protected function getCredit()
+    {
+        $un=config('codecfastsms.username');
+        $pw=config('codecfastsms.password');
+        $url="http://fastsms.codec.com.tr/FastApi.asmx/GetCredit?";
+        $url.="userName=".$un;
+        $url.="&password=".$pw;
+        $url.="&optionalParameters=null";
+        $result = file_get_contents($url);
+        $xml=simplexml_load_string($result) or die("Error: Cannot create object");
+        if ($xml === false) {
+            return response()->json(['error'=>'SMS Servis Sonucu XML Dönmedi'],402,[],JSON_UNESCAPED_UNICODE);
+        } else {
+            return $xml;
+        }
+    }
+
 }
