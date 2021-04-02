@@ -99,12 +99,11 @@ class CodecFastSmsController extends Controller
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $output = curl_exec($ch);
-        curl_close($ch);
-
         if(curl_errno($ch)){
             $this->error('SMS Servis Sonucu XML Dönmedi');
         }
+        $output = curl_exec($ch);
+        curl_close($ch);
 
         $xml=simplexml_load_string($output) or die("Error: Cannot create object");
         if ($xml === false) {
@@ -122,8 +121,17 @@ class CodecFastSmsController extends Controller
         $url.="userName=".$un;
         $url.="&password=".$pw;
         $url.="&optionalParameters=null";
-        $result = file_get_contents($url);
-        $xml=simplexml_load_string($result) or die("Error: Cannot create object");
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        if(curl_errno($ch)){
+            $this->error('SMS Servis Sonucu XML Dönmedi');
+        }
+        $output = curl_exec($ch);
+        curl_close($ch);
+
+        $xml=simplexml_load_string($output) or die("Error: Cannot create object");
         if ($xml === false) {
             return response()->json(['error'=>'SMS Servis Sonucu XML Dönmedi'],402,[],JSON_UNESCAPED_UNICODE);
         } else {
