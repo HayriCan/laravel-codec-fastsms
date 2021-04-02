@@ -138,8 +138,6 @@ class CodecFastSmsCommand extends Command
         $output = curl_exec($ch);
         curl_close($ch);
 
-
-
         $xml=simplexml_load_string($output) or die("Error: Cannot create object");
         if ($xml === false) {
             $this->error('SMS Servis Sonucu XML Dönmedi');
