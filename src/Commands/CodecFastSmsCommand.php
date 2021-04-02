@@ -114,7 +114,7 @@ class CodecFastSmsCommand extends Command
         $pw=config('codecfastsms.password');
         $sender=config('codecfastsms.sender');
         $responseType = 3;
-        $url="http://fastsms.codec.com.tr/FastApi.asmx/SendSms?";
+        $url=config('codecfastsms.base_url')."SendSms?";
         $url.="userName=".$un;
         $url.="&password=".$pw;
         $url.="&optionalParameters=".$optionalParameters;
@@ -125,8 +125,21 @@ class CodecFastSmsCommand extends Command
         $url.="&isOtn=".$isOtn;
         $url.="&headerCode=".$headerCode;
         $url.="&responseType=".$responseType;
-        $result = file_get_contents($url);
-        $xml=simplexml_load_string($result) or die("Error: Cannot create object");
+        $url.="&iysMessageType=BILGILENDIRME";
+        $url.="&iysBrandCode=";
+        $url.="&iysRecipientType=";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $output = curl_exec($ch);
+        curl_close($ch);
+
+        if(curl_errno($ch)){
+            $this->error('SMS Servis Sonucu XML Dönmedi');
+        }
+
+        $xml=simplexml_load_string($output) or die("Error: Cannot create object");
         if ($xml === false) {
             $this->error('SMS Servis Sonucu XML Dönmedi');
             return false;

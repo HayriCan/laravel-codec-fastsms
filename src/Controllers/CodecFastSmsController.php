@@ -81,7 +81,7 @@ class CodecFastSmsController extends Controller
         $pw=config('codecfastsms.password');
         $sender=config('codecfastsms.sender');
         $responseType = 3;
-        $url="http://fastsms.codec.com.tr/FastApi.asmx/SendSms?";
+        $url=config('codecfastsms.base_url')."SendSms?";
         $url.="userName=".$un;
         $url.="&password=".$pw;
         $url.="&optionalParameters=".$optionalParameters;
@@ -102,6 +102,10 @@ class CodecFastSmsController extends Controller
         $output = curl_exec($ch);
         curl_close($ch);
 
+        if(curl_errno($ch)){
+            $this->error('SMS Servis Sonucu XML Dönmedi');
+        }
+
         $xml=simplexml_load_string($output) or die("Error: Cannot create object");
         if ($xml === false) {
             return response()->json(['error'=>'SMS Servis Sonucu XML Dönmedi'],402,[],JSON_UNESCAPED_UNICODE);
@@ -114,7 +118,7 @@ class CodecFastSmsController extends Controller
     {
         $un=config('codecfastsms.username');
         $pw=config('codecfastsms.password');
-        $url="http://fastsms.codec.com.tr/FastApi.asmx/GetCredit?";
+        $url=config('codecfastsms.base_url')."GetCredit?";
         $url.="userName=".$un;
         $url.="&password=".$pw;
         $url.="&optionalParameters=null";
