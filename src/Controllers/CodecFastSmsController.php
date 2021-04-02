@@ -92,8 +92,17 @@ class CodecFastSmsController extends Controller
         $url.="&isOtn=".$isOtn;
         $url.="&headerCode=".$headerCode;
         $url.="&responseType=".$responseType;
-        $result = file_get_contents($url);
-        $xml=simplexml_load_string($result) or die("Error: Cannot create object");
+        $url.="&iysMessageType=BILGILENDIRME";
+        $url.="&iysBrandCode=";
+        $url.="&iysRecipientType=";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $output = curl_exec($ch);
+        curl_close($ch);
+
+        $xml=simplexml_load_string($output) or die("Error: Cannot create object");
         if ($xml === false) {
             return response()->json(['error'=>'SMS Servis Sonucu XML Dönmedi'],402,[],JSON_UNESCAPED_UNICODE);
         } else {
